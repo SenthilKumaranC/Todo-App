@@ -15,17 +15,25 @@ import Toolbar from './components/Toolbar/Toolbar'
 
 class App extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   state = {
     list: [
       {
-        id: "Task1", description: "Learn React", status: "inprogress"
+        id: "1", description: "Learn React", status: "inprogress"
       },
       {
-        id: "2", description: "Learn Blazor", status: "not started"
+        id: "2", description: "Learn Swift", status: "not started"
+      },
+      {
+        id: "3", description: "Learn Flutter", status: "not started"
+      },
+      {
+        id: "4", description: "Learn Angular", status: "not started"
+      },
+      {
+        id: "5", description: "Learn Kotlin", status: "inprogress"
+      },
+      {
+        id: "6", description: "Learn SpriteKit", status: "inprogress"
       }
     ]
   }
@@ -34,7 +42,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Toolbar></Toolbar>
-        {this.state.list.map((item) => <div>{item.description}</div>)}
+        {this.state.list.map((item) => <div key={item.id}>{item.description}</div>)}
       </div>
     );
   }
