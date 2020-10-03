@@ -2,6 +2,14 @@ import React from 'react';
 import './App.scss';
 import Toolbar from './components/Toolbar/Toolbar'
 
+import Todos from './components/Todos/Todos'
+
+import TodosContext from './context/todos.context'
+
+import AddTodo from './components/AddTodo/Add-Todo'
+
+import { v4 as uuidv4 } from 'uuid';
+ 
 /*function App() {
 
   return (
@@ -15,8 +23,15 @@ import Toolbar from './components/Toolbar/Toolbar'
 
 class App extends React.Component {
 
+  addTodo = (todoItem) => {
+    todoItem.id = uuidv4();
+    this.setState(state => ({
+      todos: [...state.todos, todoItem]
+    }));
+  };
+
   state = {
-    list: [
+    todos: [
       {
         id: "1", description: "Learn React", status: "inprogress"
       },
@@ -37,12 +52,14 @@ class App extends React.Component {
       }
     ]
   }
-
   render() {
     return (
       <div className="App">
         <Toolbar></Toolbar>
-        {this.state.list.map((item) => <div key={item.id}>{item.description}</div>)}
+        <TodosContext.Provider value={{ todos: this.state.todos , addTodo : this.addTodo}}>
+          <Todos></Todos>
+          <AddTodo></AddTodo>
+        </TodosContext.Provider>
       </div>
     );
   }
